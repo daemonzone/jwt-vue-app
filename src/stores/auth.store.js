@@ -1,8 +1,9 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 
-import { fetchWrapper, router } from '@/helpers';
+import {httpClient, httpInterceptor} from "@/helpers/http-client";
+import {router} from "@/helpers/router";
 
-const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
+const loginUrl = `${import.meta.env.VITE_API_URL}/login`;
 
 export const useAuthStore = defineStore({
     id: 'auth',
@@ -14,21 +15,26 @@ export const useAuthStore = defineStore({
     actions: {
         async login(username, password) {
             const email = username;
-            const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { user: { email, password } });
+            const user = await httpClient.post(loginUrl, { user: { email, password } });
 
             // update pinia state
-            this.user = user;
+            this.user = user.data;
+            console.log(user.data);
 
             // store user details and jwt in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(this.user));
+
+            // active JWT token interceptors
+            httpInterceptor.addTokenInterceptor();
+            httpInterceptor.refreshTokenInterceptor();
 
             // redirect to previous url or default to home page
-            router.push(this.returnUrl || '/');
+            await router.push(this.returnUrl || '/');
         },
-        logout() {
+        async logout() {
             this.user = null;
             localStorage.removeItem('user');
-            router.push('/login');
+            await router.push('/login');
         }
     }
 });

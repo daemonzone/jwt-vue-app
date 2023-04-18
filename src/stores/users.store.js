@@ -12,7 +12,7 @@ export const useUsersStore = defineStore({
         async getCurrentUserData() {
             this.users = { loading: true }
             httpClient.get(baseUrl)
-                .then(users => this.users = users)
+                .then(users => this.users = users.data)
                 .catch(error => this.users = { error })
         }        
     }

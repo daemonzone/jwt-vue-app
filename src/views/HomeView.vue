@@ -9,20 +9,16 @@ import {useUsersStore} from '@/stores'
 const usersStore = useUsersStore()
 const { users } = storeToRefs(usersStore)
 
+const baseUrl = `${import.meta.env.VITE_API_URL}`
+
 // usersStore.getAll();
 usersStore.getCurrentUserData()
 </script>
 
 <template>
     <div>
-        <h1>Ciao {{users?.candidate?.contact?.name}}!</h1>
+        <h1>Ciao {{users?.contact?.name}}!</h1>
         <p>You're logged in with Vue 3 + Pinia & JWT!!</p>
-        <h3>Users from secure api end point:</h3>
-        <ul v-if="users.length">
-            <li v-for="user in users" :key="user.id">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
-        <div v-if="users.loading" class="spinner-border spinner-border-sm"></div>
-        <div v-if="users.error" class="text-danger">Error loading users: {{users.error}}</div>
     </div>
     <section style="background-color: #eee;">
         <div class="container py-5">
@@ -41,17 +37,17 @@ usersStore.getCurrentUserData()
             <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
-                <div class="card-body text-center">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                    <h5 class="my-3">{{users?.candidate?.contact?.name}} {{users?.candidate?.contact?.surname}}</h5>
-                    <p class="text-muted mb-1">Full Stack Developer</p>
-                    <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                    <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                    <div class="card-body text-center">
+                        Url: {{ baseUrl }}
+                        <img v-bind:src="baseUrl + users.profilePicUrl" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5 class="my-3">{{users?.contact?.name}} {{users?.contact?.surname}}</h5>
+                        <p class="text-muted mb-1">{{users?.contact?.profession?.name}}</p>
+                        <p class="text-muted mb-4">{{users?.contact?.province?.name}}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                        <button type="button" class="btn btn-primary">Follow</button>
+                        <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="card mb-4 mb-lg-0">
                 <div class="card-body p-0">

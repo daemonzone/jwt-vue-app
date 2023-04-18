@@ -38,7 +38,6 @@ usersStore.getCurrentUserData()
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        Url: {{ baseUrl }}
                         <img v-bind:src="baseUrl + users.profilePicUrl" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                         <h5 class="my-3">{{users?.contact?.name}} {{users?.contact?.surname}}</h5>
                         <p class="text-muted mb-1">{{users?.contact?.profession?.name}}</p>

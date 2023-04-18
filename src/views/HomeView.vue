@@ -43,8 +43,8 @@ usersStore.getCurrentUserData()
                         <p class="text-muted mb-1">{{users?.contact?.profession?.name}}</p>
                         <p class="text-muted mb-4">{{users?.contact?.province?.name}}</p>
                         <div class="d-flex justify-content-center mb-2">
-                        <button type="button" class="btn btn-primary">Follow</button>
-                        <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        <button type="button" class="btn btn-primary mr-1">Follow</button>
+                        <button type="button" class="btn btn-outline-primary ms-1 ml-1">Message</button>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ usersStore.getCurrentUserData()
                         <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">Johnatan Smith</p>
+                        <p class="text-muted mb-0">{{users?.contact?.surname}} {{users?.contact?.name}} </p>
                     </div>
                     </div>
                     <hr>
@@ -92,7 +92,7 @@ usersStore.getCurrentUserData()
                         <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">example@example.com</p>
+                        <p class="text-muted mb-0">{{users?.contact?.email}}</p>
                     </div>
                     </div>
                     <hr>
@@ -101,16 +101,7 @@ usersStore.getCurrentUserData()
                         <p class="mb-0">Phone</p>
                     </div>
                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">(097) 234-5678</p>
-                    </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                    <div class="col-sm-3">
-                        <p class="mb-0">Mobile</p>
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="text-muted mb-0">(098) 765-4321</p>
+                        <p class="text-muted mb-0">{{users?.contact?.phoneNumber}}</p>
                     </div>
                     </div>
                     <hr>
@@ -119,7 +110,7 @@ usersStore.getCurrentUserData()
                         <p class="mb-0">Address</p>
                     </div>
                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                        <p class="text-muted mb-0">{{ [users?.contact?.address , users?.contact?.city, users?.contact?.province?.name].join(', ') }}</p>
                     </div>
                     </div>
                 </div>

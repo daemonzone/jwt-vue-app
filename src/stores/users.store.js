@@ -1,6 +1,5 @@
-import { defineStore } from 'pinia'
-
-import { fetchWrapper } from '@/helpers'
+import {defineStore} from 'pinia'
+import {httpClient} from "@/helpers/http-client";
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/api-interns`
 
@@ -10,15 +9,9 @@ export const useUsersStore = defineStore({
         users: {}
     }),
     actions: {
-        async getAll() {
-            this.users = { loading: true }
-            fetchWrapper.get(baseUrl)
-                .then(users => this.users = users)
-                .catch(error => this.users = { error })
-        },
         async getCurrentUserData() {
             this.users = { loading: true }
-            fetchWrapper.get(baseUrl)
+            httpClient.get(baseUrl)
                 .then(users => this.users = users)
                 .catch(error => this.users = { error })
         }        

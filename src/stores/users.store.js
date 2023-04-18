@@ -14,6 +14,9 @@ export const useUsersStore = defineStore({
             httpClient.get(baseUrl)
                 .then(users => this.users = users.data)
                 .catch(error => this.users = { error })
+        },
+        async refresh() {
+            await this.getCurrentUserData();
         }        
     }
 })

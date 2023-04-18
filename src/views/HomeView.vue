@@ -1,20 +1,21 @@
 <script setup>
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 
-import { useAuthStore, useUsersStore } from '@/stores';
+import { useAuthStore, useUsersStore } from '@/stores'
 
-const authStore = useAuthStore();
-const { user: authUser } = storeToRefs(authStore);
+// const authStore = useAuthStore()
+// const { user: authUser } = storeToRefs(authStore)
 
-const usersStore = useUsersStore();
-const { users } = storeToRefs(usersStore);
+const usersStore = useUsersStore()
+const { users } = storeToRefs(usersStore)
 
-usersStore.getAll();
+// usersStore.getAll();
+usersStore.getCurrentUserData()
 </script>
 
 <template>
     <div>
-        <h1>Hi {{authUser?.firstName}}!</h1>
+        <h1>Ciao {{users?.candidate?.contact?.name}}!</h1>
         <p>You're logged in with Vue 3 + Pinia & JWT!!</p>
         <h3>Users from secure api end point:</h3>
         <ul v-if="users.length">
@@ -43,7 +44,7 @@ usersStore.getAll();
                 <div class="card-body text-center">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                    <h5 class="my-3">John Smith</h5>
+                    <h5 class="my-3">{{users?.candidate?.contact?.name}} {{users?.candidate?.contact?.surname}}</h5>
                     <p class="text-muted mb-1">Full Stack Developer</p>
                     <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
                     <div class="d-flex justify-content-center mb-2">
